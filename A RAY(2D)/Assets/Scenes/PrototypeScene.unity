@@ -783,7 +783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyChase2D
   speed: 1.75
   detectionRadius: 4.13
-  stopDistance: 1.5
+  attackRange: 1
   anim: {fileID: 1550413553}
 --- !u!95 &1550413553
 Animator:

@@ -5,7 +5,8 @@ public class EnemyChase2D : MonoBehaviour
     [Header("Chase Settings")]
     public float speed = 3f;
     public float detectionRadius = 8f;   // enemy only chases if player is close enough
-    public float stopDistance = 0.5f;    // enemy stops when very close (prevents jitter)
+    //public float stopDistance = 0.2f;    // enemy stops when very close (prevents jitter)
+    public float attackRange = 1.2f; // distance at which enemy attacks
 
     public Animator anim;
 
@@ -34,7 +35,7 @@ public class EnemyChase2D : MonoBehaviour
             if (p != null) 
                 player = p.transform;
 
-            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             //switch animation
             anim.SetFloat("horizontalInput", 0);
             return;
@@ -44,17 +45,26 @@ public class EnemyChase2D : MonoBehaviour
 
         if (dist > detectionRadius)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             anim.SetFloat("horizontalInput", 0);
             return;
         }
 
-        if (dist <= stopDistance)
+        if (dist <= attackRange)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
-            anim.SetFloat("horizontalInput", 0);
-            return;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); //stops horizontal movement when attacking
+
+            anim.SetTrigger("Attack"); // trigger attack anim.
+            return; 
         }
+
+        // if (dist <= stopDistance)
+        // {
+        //     rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        //     anim.SetFloat("horizontalInput", 0);
+        //     return;
+        // }
+
 
         //calc. dir. vectior from enemy to player
         //gives us how far and in what direction the player is, enemy -> player
@@ -68,10 +78,10 @@ public class EnemyChase2D : MonoBehaviour
         anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput));
 
         //flips sprite
-        if (horizontalInput > -0.01f)
+        if (horizontalInput > 0.01f)
                 transform.localScale = new Vector3(1f, 1f, 1f);
 
-        else if (horizontalInput < 0.01f)
+        else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
 
