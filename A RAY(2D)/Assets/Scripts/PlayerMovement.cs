@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class player_movement : MonoBehaviour
@@ -17,6 +18,7 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float horizontalInput = Input.GetAxis("Horizontal");
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
 
@@ -28,9 +30,15 @@ public class player_movement : MonoBehaviour
 
         else if (horizontalInput < 0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
-
+        // jump
          if (Input.GetKey(KeyCode.Space))
             body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
+
+        //attack
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            anim.SetTrigger("Attack");
+        }
         
     }
 }
