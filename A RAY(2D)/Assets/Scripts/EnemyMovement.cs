@@ -9,6 +9,7 @@ public class EnemyChase2D : MonoBehaviour
     public float attackRange = 1.2f; // distance at which enemy attacks
 
     public Animator anim;
+    
 
     Transform player;
     Rigidbody2D rb;
@@ -50,39 +51,31 @@ public class EnemyChase2D : MonoBehaviour
             return;
         }
 
+        // Calculate direction to player
+        Vector2 direction = player.position - transform.position;
+
+        // Always face the player (even when attacking)
+        if (direction.x > 0.01f)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        else if (direction.x < -0.01f)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        // Now check attack
         if (dist <= attackRange)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); //stops horizontal movement when attacking
-
-            anim.SetTrigger("Attack"); // trigger attack anim.
-            return; 
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            anim.SetTrigger("Attack");
+            return;
         }
 
-        // if (dist <= stopDistance)
-        // {
-        //     rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        //     anim.SetFloat("horizontalInput", 0);
-        //     return;
-        // }
+        // Movement logic
+        float horizontalInput = Mathf.Sign(direction.x);
 
-
-        //calc. dir. vectior from enemy to player
-        //gives us how far and in what direction the player is, enemy -> player
-        Vector2 direction = player.position - transform.position;
-        float horizontalInput = Mathf.Sign(direction.x); //move right or move left, horizontal
-
-        Vector2 velocity = rb.linearVelocity; //stores current velocity so we dont accidentlly overwrite y velocity
-        velocity.x = horizontalInput * speed; // change only the x movement, horizontal speed
-        rb.linearVelocity = velocity; //apply updated velocity 
+        Vector2 velocity = rb.linearVelocity;
+        velocity.x = horizontalInput * speed;
+        rb.linearVelocity = velocity;
 
         anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput));
-
-        //flips sprite
-        if (horizontalInput > 0.01f)
-                transform.localScale = new Vector3(1f, 1f, 1f);
-
-        else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
 
 
     }
