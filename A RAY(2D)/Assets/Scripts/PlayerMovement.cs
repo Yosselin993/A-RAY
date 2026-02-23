@@ -1,13 +1,15 @@
 using NUnit.Framework;
 using UnityEngine;
 
-public class player_movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] private float speed;
     private Rigidbody2D body;
 
     public Animator anim;
+
+
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
