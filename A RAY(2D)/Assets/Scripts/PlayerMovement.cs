@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
 
     public Animator anim;
+
+    public Transform attackPoint;      // where the attack is centered
+    public float attackRange = 1f;     // radius of attack
+    public LayerMask enemyLayers;      // only detect enemies
 
 
  
@@ -40,7 +43,38 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             anim.SetTrigger("Attack");
+            Attack();
         }
         
+    }
+
+    void Attack()
+    {
+        // Detect all colliders inside attack circle that are on the Enemy layer
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
+            attackPoint.position,
+            attackRange,
+            enemyLayers
+        );
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(1); // 1 = half heart
+            }
+        }
+    }
+
+    // for debugging
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
