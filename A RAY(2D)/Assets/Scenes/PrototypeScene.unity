@@ -379,7 +379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 230, y: -15}
+  m_AnchoredPosition: {x: 237.53, y: -15}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &289881519
@@ -404,7 +404,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 4606908045521496030, guid: b25084b596c3435429874c552c242500, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -837,7 +837,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 4606908045521496030, guid: b25084b596c3435429874c552c242500, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1024,7 +1024,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 4606908045521496030, guid: b25084b596c3435429874c552c242500, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1251,6 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Combat
   damage: 1
+  attackCooldown: 1
 --- !u!1 &1795801446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,15 +1456,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795801446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93179cbff4a43ee45935f88fcb3d2aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  currentHealth: 0
-  maxHealth: 3
-  PlayerSr: {fileID: 0}
-  PlayerMovement: {fileID: 0}
+  maxHealth: 6
+  currentHealth: 6
 --- !u!114 &1795801454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,15 +1475,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c69f626fbbecf1469d07eb67dc9bfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthDisplay
-  currentHealth: 0
-  maxHealth: 3
-  halfHeart: {fileID: 4412148857523549502, guid: c326fe29eb1a1f543a3863013d8a98fe, type: 3}
+  playerHealth: {fileID: 1795801453}
   fullHeart: {fileID: 4606908045521496030, guid: b25084b596c3435429874c552c242500, type: 3}
+  halfHeart: {fileID: 4412148857523549502, guid: c326fe29eb1a1f543a3863013d8a98fe, type: 3}
   hearts:
   - {fileID: 1234682703}
   - {fileID: 1463157437}
   - {fileID: 289881519}
-  PlayerHealth: {fileID: 0}
 --- !u!1 &2006777006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1585,7 @@ Transform:
   m_GameObject: {fileID: 2006777006}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0527978, y: 1.0500001, z: -10}
+  m_LocalPosition: {x: 0.7594665, y: 1.0500001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1715,7 +1712,7 @@ Transform:
   m_GameObject: {fileID: 2012850490}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0527978, y: 1.0500001, z: -10}
+  m_LocalPosition: {x: 0.7594665, y: 1.0500001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

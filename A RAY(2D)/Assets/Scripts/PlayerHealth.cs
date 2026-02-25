@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-  
-  public int currentHealth;
-  public int maxHealth;
+    public int maxHealth = 6;   // 3 hearts
+    public int currentHealth;
 
-  public SpriteRenderer PlayerSr;
-  public PlayerMovement PlayerMovement;
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
 
-
-  public void ChangeHealth(int amount)
+    public void ChangeHealth(int amount)
     {
         currentHealth += amount;
 
-        if(currentHealth <= 0)
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (currentHealth <= 0)
         {
+            Debug.Log("Player died"); // shows on console 
             gameObject.SetActive(false);
         }
     }

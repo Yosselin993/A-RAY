@@ -3,44 +3,36 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-    public int currentHealth;
-    public int maxHealth;
+    public PlayerHealth playerHealth;
 
-    public Sprite halfHeart;
-    public Sprite fullHeart;
-    public Image[] hearts; // using an array to put as many hearts as wanted
+    public Sprite fullHeart; // two health points
+    public Sprite halfHeart; // one health point
 
-    public PlayerHealth PlayerHealth; // to be able to talk ot one another
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-       
-    }
+    public Image[] hearts; // array for UI img. hearts, each img. rep. one heart slot 
 
-    // Update is called once per frame
     void Update()
     {
+        int health = playerHealth.currentHealth; // grabing players health value 
 
-        currentHealth = PlayerHealth.currentHealth;
-        maxHealth = PlayerHealth.maxHealth;
+        // loop through every heart slot in UI
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < currentHealth)
-            {
-                hearts[i].sprite = fullHeart;
-            }
-            else
-            {
-                hearts[i].sprite = halfHeart;
-            }
+            //each heart rep. two health points
+            int heartValue = (i * 2) + 2;
 
-            if(i < maxHealth)
+            if (health >= heartValue) //If players health is equal to or greater than this heart's full value
             {
-                hearts[i].enabled = true;
+                hearts[i].enabled = true; // makes sure heart is visible 
+                hearts[i].sprite = fullHeart; // shows full heart spirte
             }
-            else
+            else if (health == heartValue - 1) //If players health is exactly one less than this heart's full value
             {
-                hearts[i].enabled = false;
+                hearts[i].enabled = true; // makes sure heart is vis.
+                hearts[i].sprite = halfHeart; // shows half heart sprite
+            }
+            else // If players health is lower than this heart's range, heart should not appear
+            {
+                hearts[i].enabled = false; // completely hides heart so it wont show
             }
         }
     }
