@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyChase2D : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     [Header("Chase Settings")]
     public float speed = 3f;
