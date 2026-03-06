@@ -774,10 +774,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 331874058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e2ab5fd8a01834d922a5f6a7c4c7b2, type: 3}
+  m_Script: {fileID: 11500000, guid: fe23c6285a0242d4ab9baca5d642e996, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BackgroundScroll
-  scrollSpeed: 0.03
+  m_EditorClassIdentifier: Assembly-CSharp::WallScroll
+  scrollSpeed: 0.05
+  wall: {fileID: 1654872860}
 --- !u!1 &333086243
 GameObject:
   m_ObjectHideFlags: 0
@@ -4786,18 +4787,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1654872856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9286143c4954549b7ed0ec65e373c9, type: 3}
+  m_Script: {fileID: 11500000, guid: b136eddbf39c3e2468f4f1432b913319, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MulitiScroll
-  scrollSpeed: 0.1
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundScrollConnect
+  scrollSpeed: 0.05
   backgrounds:
-  - {fileID: 2800000, guid: cfd21b596323b0e419ee9e56ec1f5639, type: 3}
-  - {fileID: 2800000, guid: d89032964572f574ca153ecd73f06ac7, type: 3}
   - {fileID: 2800000, guid: 226386448f2e265448423484882ae028, type: 3}
-  - {fileID: 2800000, guid: 1bd00c11f8a9c77428c660981d4281fa, type: 3}
+  - {fileID: 2800000, guid: d89032964572f574ca153ecd73f06ac7, type: 3}
+  - {fileID: 2800000, guid: cfd21b596323b0e419ee9e56ec1f5639, type: 3}
   - {fileID: 2800000, guid: cd794e54dfbf7d244b3b1db89ed8095f, type: 3}
-  - {fileID: 2800000, guid: aded51a0b7b1a0e4a8ca0225c29a7a63, type: 3}
-  - {fileID: 2800000, guid: 014abba76acb31a4e97a94e3015469ed, type: 3}
 --- !u!1 &1657222381
 GameObject:
   m_ObjectHideFlags: 0
