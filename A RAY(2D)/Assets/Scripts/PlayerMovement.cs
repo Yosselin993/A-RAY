@@ -13,11 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;      // where the attack is centered
     public float attackRange = 1f;     // radius of attack
     public LayerMask enemyLayers;      // only detect enemies
+    public int attackDamage = 1;       // player attack damage 
 
     public float attackCooldown = 0.5f;  // seconds between attacks
     private float nextAttackTime = 0f;   // when you're allowed to attack again
     private bool isAttacking = false;    // helps prevent weird repeats
-
 
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
         else if (horizontalInput < 0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
+
         // jump
-         if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
 
         //attack
@@ -83,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (enemyHealth != null)
             {
-                Debug.Log("Found EnemyHealth on: " + enemyHealth.gameObject.name + " -> dealing 1 damage"); //debugging
-                enemyHealth.TakeDamage(1);
+                Debug.Log("Found EnemyHealth on: " + enemyHealth.gameObject.name + " -> dealing damage"); //debugging
+                enemyHealth.TakeDamage(attackDamage);
             }
             else
             {
@@ -98,7 +99,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isAttacking = false;
     }
-
 
 
     // for debugging, shows attack range in Scene view when player is selected
