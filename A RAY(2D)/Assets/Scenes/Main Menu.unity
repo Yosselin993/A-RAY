@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe23c6285a0242d4ab9baca5d642e996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallScroll
-  scrollSpeed: 0.05
+  scrollSpeed: 0.12
   wall: {fileID: 1654872860}
 --- !u!1 &333086243
 GameObject:
@@ -3153,7 +3153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3182719, g: 0.016019935, b: 0.6792453, a: 1}
+  m_Color: {r: 0.22080809, g: 0.038581353, b: 0.4811321, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3810,7 +3810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25668827, g: 0.07738519, b: 0.3490566, a: 1}
+  m_Color: {r: 0.764151, g: 0.6091581, b: 0.6091581, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4680,7 +4680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23529413, g: 0.043137256, b: 0.6666667, a: 1}
+  m_Color: {r: 0.31764707, g: 0, b: 0.6784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4790,7 +4790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b136eddbf39c3e2468f4f1432b913319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundScrollConnect
-  scrollSpeed: 0.05
+  scrollSpeed: 0.2
   backgrounds:
   - {fileID: 2800000, guid: 226386448f2e265448423484882ae028, type: 3}
   - {fileID: 2800000, guid: d89032964572f574ca153ecd73f06ac7, type: 3}
@@ -4909,7 +4909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -150}
+  m_AnchoredPosition: {x: -12, y: -150}
   m_SizeDelta: {x: 775, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741056569
@@ -4925,7 +4925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.078431375, g: 0, b: 0.24705884, a: 1}
+  m_Color: {r: 0.13249223, g: 0.03355287, b: 0.24528301, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5705,7 +5705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.30980393, g: 0.04705883, b: 0.7607844, a: 1}
+  m_Color: {r: 0.31764707, g: 0, b: 0.6784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5917,7 +5917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3956015, g: 0.08597365, b: 0.8679245, a: 1}
+  m_Color: {r: 0.31764707, g: 0, b: 0.6784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
