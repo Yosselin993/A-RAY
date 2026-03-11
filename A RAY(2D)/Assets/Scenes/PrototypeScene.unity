@@ -2003,7 +2003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &827309567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3744,6 +3744,7 @@ MonoBehaviour:
   isDead: 0
   anim: {fileID: 0}
   deathDelay: 1
+  gameover: {fileID: 0}
 --- !u!1 &1800043196
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,7 +4412,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 827309571}
         m_TargetAssemblyTypeName: GameOverScript, Assembly-CSharp
-        m_MethodName: Restart_mm
+        m_MethodName: Quit_mmm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
