@@ -30,10 +30,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal"); // for AWDS or arrow keys
+        body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); // moving player left and right
 
-        anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput));
+        anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput)); // walking animation
  
         //Flip player when facing left/right.
         if (horizontalInput > -0.01f)
@@ -61,35 +61,37 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void DealDamage()
+    public void DealDamage() // function for the anim. event for the attack animation for player
     {
         Debug.Log("DealDamage fired!"); // debugging
 
-        if (!isAttacking) { return; }
-        if (attackPoint == null) { return; }
+        if (!isAttacking) { return; } // if player is not attacking, stop
+        if (attackPoint == null) { return; } // if no attack point is assigned, stop
 
+        // finding all colliders in the attack range that are on the enemy layer
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
             attackPoint.position,
             attackRange,
             enemyLayers
         );
 
-        Debug.Log("Hit count: " + hitEnemies.Length);
+        Debug.Log("Hit count: " + hitEnemies.Length);  // debug, console show 
 
+        // going through each enemy collider 
         foreach (Collider2D c in hitEnemies)
         {
 
             // parent-safe (common when collider is on child) -- need to fix
-            EnemyHealth enemyHealth = c.GetComponentInParent<EnemyHealth>();
+            EnemyHealth enemyHealth = c.GetComponentInParent<EnemyHealth>(); // trying to find enemy health on object
 
             if (enemyHealth != null)
             {
                 Debug.Log("Found EnemyHealth on: " + enemyHealth.gameObject.name + " -> dealing damage"); //debugging
-                enemyHealth.TakeDamage(attackDamage);
+                enemyHealth.TakeDamage(attackDamage); // if enemy health exists, deal damage
             }
             else
             {
-                Debug.Log("No EnemyHealth found on this collider or its parents."); //debugging
+                Debug.Log("No EnemyHealth found on this collider or its parents."); //debugging, console shows
             }
         }
     }
@@ -97,17 +99,18 @@ public class PlayerMovement : MonoBehaviour
     // Called by an Animation Event near the end of the attack animation
     public void EndAttack()
     {
-        isAttacking = false;
+        isAttacking = false; // shows the attack as finished
     }
 
 
     // for debugging, shows attack range in Scene view when player is selected
     void OnDrawGizmosSelected()
     {
+        // if attack point is missing, do nothing
         if (attackPoint == null)
             return;
 
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.red; // red circle to show range
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

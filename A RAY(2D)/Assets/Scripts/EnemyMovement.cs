@@ -24,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
     {
         GameObject p = GameObject.FindGameObjectWithTag("Player");
 
+        // if player exists, store ref. to its transfrorm and health
         if (p != null) 
             player = p.transform;
             playerHealth = p.GetComponent<PlayerHealth>();
@@ -31,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // if player ref is missing
         if (player == null)
         {
             // // Try to reacquire player 
@@ -38,9 +40,9 @@ public class EnemyMovement : MonoBehaviour
             // if (p != null) 
             //     player = p.transform;
 
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stop enemy movement
             //switch animation
-            anim.SetFloat("horizontalInput", 0);
+            anim.SetFloat("horizontalInput", 0); // switching to idle
             return;
         }
         // stops movement if player is dead 
@@ -51,8 +53,9 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 // 
-        float dist = Vector2.Distance(rb.position, player.position);
+        float dist = Vector2.Distance(rb.position, player.position); // calculating distance between player and enemy
 
+        // if player is outside detection, enemy does nothing
         if (dist > detectionRadius)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -72,23 +75,21 @@ public class EnemyMovement : MonoBehaviour
         // Now checking attack
         if (dist <= attackRange)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stops moving 
             anim.SetTrigger("Attack");
             return;
         }
 
         // Movement logic
-        float horizontalInput = Mathf.Sign(direction.x);
+        float horizontalInput = Mathf.Sign(direction.x); // horizontal direction
 
         Vector2 velocity = rb.linearVelocity;
         velocity.x = horizontalInput * speed;
         rb.linearVelocity = velocity;
 
-        anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput));
-
+        anim.SetFloat("horizontalInput", Mathf.Abs(horizontalInput)); // update walking animation on movement
 
     }
 
-    
     
 }
