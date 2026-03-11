@@ -10,6 +10,9 @@ public class HealthDisplay : MonoBehaviour
 
     public Image[] hearts; // array for UI img. hearts, each img. rep. one heart slot 
 
+    // public GameOverScript gameover;
+    // private bool isDead;
+
     void Update()
     {
         int health = playerHealth.currentHealth; // grabing players health value 
@@ -33,7 +36,18 @@ public class HealthDisplay : MonoBehaviour
             else // If players health is lower than this heart's range, heart should not appear
             {
                 hearts[i].enabled = false; // completely hides heart so it wont show
+                
             }
         }
+
+        // if (health <= 0 && !isDead)
+        // {
+        //     isDead = true;
+
+        //     if (gameover != null)
+        //         gameover.OpenGameoverPanel();
+        // }
+
+
     }
 }
