@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     
 
     Transform player;
+    PlayerHealth playerHealth;
     Rigidbody2D rb;
 
     void Awake()
@@ -25,23 +26,31 @@ public class EnemyMovement : MonoBehaviour
 
         if (p != null) 
             player = p.transform;
+            playerHealth = p.GetComponent<PlayerHealth>();
     }
 
     void FixedUpdate()
     {
         if (player == null)
         {
-            // Try to reacquire player (useful if you respawn / destroy-recreate)
-            GameObject p = GameObject.FindGameObjectWithTag("Player");
-            if (p != null) 
-                player = p.transform;
+            // // Try to reacquire player 
+            // GameObject p = GameObject.FindGameObjectWithTag("Player");
+            // if (p != null) 
+            //     player = p.transform;
 
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             //switch animation
             anim.SetFloat("horizontalInput", 0);
             return;
         }
-
+        // stops movement if player is dead 
+        if (playerHealth != null && playerHealth.isDead)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            anim.SetFloat("horizontalInput", 0);
+            return;
+        }
+// 
         float dist = Vector2.Distance(rb.position, player.position);
 
         if (dist > detectionRadius)
@@ -51,16 +60,16 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        // Calculate direction to player
+        // Calculating the direction to player
         Vector2 direction = player.position - transform.position;
 
-        // Always face the player (even when attacking)
+        // Always face the player, moving/atttacking
         if (direction.x > 0.01f)
             transform.localScale = new Vector3(1f, 1f, 1f);
         else if (direction.x < -0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
-        // Now check attack
+        // Now checking attack
         if (dist <= attackRange)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);

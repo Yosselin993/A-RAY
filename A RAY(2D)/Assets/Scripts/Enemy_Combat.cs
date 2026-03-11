@@ -10,7 +10,12 @@ public class Enemy_Combat : MonoBehaviour
     {
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
 
-        if (player != null && Time.time >= lastAttackTime + attackCooldown)
+        if (player == null) return; // if there is no player health, do nothing
+
+        if (player.isDead) return; // if player is dead, stop attacking
+
+        // attack if cooldown is finished
+        if (Time.time >= lastAttackTime + attackCooldown)
         {
             player.ChangeHealth(-damage);
             lastAttackTime = Time.time;

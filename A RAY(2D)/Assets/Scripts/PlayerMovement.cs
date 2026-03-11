@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D c in hitEnemies)
         {
 
-            // parent-safe (common when collider is on child)
+            // parent-safe (common when collider is on child) -- need to fix
             EnemyHealth enemyHealth = c.GetComponentInParent<EnemyHealth>();
 
             if (enemyHealth != null)
