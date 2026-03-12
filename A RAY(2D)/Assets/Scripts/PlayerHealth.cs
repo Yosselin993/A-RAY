@@ -13,10 +13,13 @@ public class PlayerHealth : MonoBehaviour
     [Header("Death")]
     public Animator anim;
     public float deathDelay = 1f; // how long to wait before disabling player, to showcase death
+    public GameOverScrpit gameover;
 
     private PlayerMovement playerMovement;
     private Rigidbody2D rb;
     private Collider2D[] colliders;
+
+
 
 
     void Start()
@@ -33,11 +36,22 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)  
         {
             isDead = true; //died
             Debug.Log("Player died"); // shows on console 
+            // gameover.OpenGameoverPanel();
             gameObject.SetActive(false);
+            if (gameover != null)
+            {
+                Debug.Log("Opening GameOver Panel");
+                gameover.OpenGameoverPanel();
+            }
+            else
+            {
+                Debug.Log("GameOverScript NOT assigned!");
+            }
+                        
         }
     }
 }
