@@ -13,6 +13,7 @@ public class GameOverScript : MonoBehaviour
     public void OpenGameoverPanel()
     {
         GameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
     public void Restart_mm()
     {

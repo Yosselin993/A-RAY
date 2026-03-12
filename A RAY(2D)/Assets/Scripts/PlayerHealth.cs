@@ -41,10 +41,17 @@ public class PlayerHealth : MonoBehaviour
             isDead = true; //died
             Debug.Log("Player died"); // shows on console 
             // gameover.OpenGameoverPanel();
-            // gameObject.SetActive(false);
+            gameObject.SetActive(false);
             if (gameover != null)
+            {
+                Debug.Log("Opening GameOver Panel");
                 gameover.OpenGameoverPanel();
-            
+            }
+            else
+            {
+                Debug.Log("GameOverScript NOT assigned!");
+            }
+                        
         }
     }
 }
