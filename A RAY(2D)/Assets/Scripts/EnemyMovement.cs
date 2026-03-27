@@ -6,7 +6,8 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 3f;
     public float detectionRadius = 8f;   // enemy only chases if player is close enough
     //public float stopDistance = 0.2f;    // enemy stops when very close (prevents jitter)
-    public float attackRange = 1.2f; // distance at which enemy attacks
+    // have to connect this part with Enemy_Combat
+    public float attackRange = 1.2f; // distance at which enemy attacks 
 
     public Animator anim;
     
@@ -72,13 +73,30 @@ public class EnemyMovement : MonoBehaviour
         else if (direction.x < -0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
-        // Now checking attack
+// old code
+        // // Now checking attack
+        // if (dist <= attackRange)
+        // {
+        //     rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stops moving 
+        //     anim.SetTrigger("Attack");
+        //     return;
+        // }
+
+        // updated enemy attack
         if (dist <= attackRange)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stops moving 
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stops moving
+            // anim.SetFloat("horizontalInput", 0); // this switches to the idle
+
+            Enemy_Combat combat = GetComponent<Enemy_Combat>();
+            if( combat != null)
+            {
+                combat.StartAttack();
+            }
             anim.SetTrigger("Attack");
             return;
         }
+        
 
         // Movement logic
         float horizontalInput = Mathf.Sign(direction.x); // horizontal direction
