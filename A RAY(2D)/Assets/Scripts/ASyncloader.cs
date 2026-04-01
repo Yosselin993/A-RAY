@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class ASnycloader : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private GameObject MainMenu;
+    [SerializeField] private GameObject MusicPlayer;
 
     [Header("Slider")]
     [SerializeField] private Slider loadingSlider;
     public void LoadLevelBtn(string levelToLoad)
     {
-        MainMenu.SetActive(false);
+        MusicPlayer.SetActive(false);
         loadingScreen.SetActive(true);
 
         StartCoroutine(LoadLevelASync(levelToLoad));
