@@ -49,5 +49,10 @@ public class MainMenuController : MonoBehaviour
         GOBack();
     }
 
+    public void OpenMusicPlayer()
+    {
+        SceneManager.LoadScene("MusicPlayer");
+    }
+
    
 }
