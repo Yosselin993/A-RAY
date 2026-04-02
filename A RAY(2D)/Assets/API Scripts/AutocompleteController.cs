@@ -17,6 +17,8 @@ public class AutocompleteController : MonoBehaviour
 
     void Start()
     {
+        // Add a listener to the input field so that every time the text changes,
+        // the OnTextChanged function is automatically called
         searchInput.onValueChanged.AddListener(OnTextChanged);
         suggestionContainer.gameObject.SetActive(false); //hiding dropdown panel
     }
@@ -26,14 +28,20 @@ public class AutocompleteController : MonoBehaviour
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
+        // If the input field is empty or only contains spaces
          if (string.IsNullOrWhiteSpace(text))
         {
+            // Clear any existing suggestions from the UI
             ClearSuggestions();
+            // Hide the suggestion dropdown panel
             suggestionContainer.gameObject.SetActive(false); // hide when the textbox is empty
+            // Stop further execution
             return;
         }
-
+        // If the user is typing something valid, show the dropdown panel
         suggestionContainer.gameObject.SetActive(true); // show when user is typing song
+
+        // Start a delayed search coroutine (adds a small delay before searching) (will change this part)
         typingCoroutine = StartCoroutine(DelayedSearch(text));
     }
 
