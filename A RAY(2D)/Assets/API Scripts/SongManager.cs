@@ -17,6 +17,8 @@ public class SongManager : MonoBehaviour
 
     public List<string> downloadedSongPaths = new List<string>();
     private List<SongSuggestion> storedSongs = new List<SongSuggestion>();
+    // Track downloaded songs by video_id
+    public Dictionary<string, string> downloadedById = new Dictionary<string, string>();
 
     public int maxsonglist = 8;
 
@@ -132,6 +134,31 @@ public class SongManager : MonoBehaviour
         RefreshStoredSongsUI();
     }
 
+    // Added for Up/Down reordering
+    public void MoveSongUp(SongSuggestion song)
+    {
+        int index = storedSongs.IndexOf(song);
+        if (index > 0)
+        {
+            storedSongs.RemoveAt(index);
+            storedSongs.Insert(index - 1, song);
+
+            RefreshStoredSongsUI();
+        }
+    }
+
+    public void MoveSongDown(SongSuggestion song)
+    {
+        int index = storedSongs.IndexOf(song);
+        if (index < storedSongs.Count - 1)
+        {
+            storedSongs.RemoveAt(index);
+            storedSongs.Insert(index + 1, song);
+
+            RefreshStoredSongsUI();
+        }
+    }
+
 
     // [System.Serializable]
     // public class SongSuggestion
@@ -147,14 +174,15 @@ public class SongManager : MonoBehaviour
     //     if (!downloadedSongPaths.Contains(path))
     // {
     //     downloadedSongPaths.Add(path);
-       if (!string.IsNullOrEmpty(path) && !downloadedSongPaths.Contains(path))
+       //if (!string.IsNullOrEmpty(path) && !downloadedSongPaths.Contains(path))
+        //{
+        //    downloadedSongPaths.Add(path);
+        //}
+        if (!string.IsNullOrEmpty(path))
         {
             downloadedSongPaths.Add(path);
+            Debug.Log("[SongManager] Added downloaded path: " + path + " (total now: " + downloadedSongPaths.Count + ")");
         }
-
     }
-
-
-
 
 }

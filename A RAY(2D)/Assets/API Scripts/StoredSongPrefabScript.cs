@@ -13,4 +13,15 @@ public class StoredSongPrefabScript : MonoBehaviour
     {
         SongManager.Instance.DeleteSong(song);
     }
+
+    // Added for Up/Down buttons would be easier to do so rather than a single button
+    public void MoveUp()
+    {
+        SongManager.Instance.MoveSongUp(song);
+    }
+
+    public void MoveDown()
+    {
+        SongManager.Instance.MoveSongDown(song);
+    }
 }
