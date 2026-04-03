@@ -102,6 +102,17 @@ public class ASnycloader : MonoBehaviour
             // {
             //     loadingSlider.value = (float)(i + 1) / totalSongs;
             // }
+
+            // REBUILD downloadedById now that downloadedSongPaths is populated
+            var stored = SongManager.Instance.GetStoredSongs();
+            for (int j = 0; j < stored.Count; j++)
+            {
+                var s = stored[j];
+                if (s != null && j < SongManager.Instance.downloadedSongPaths.Count)
+                    SongManager.Instance.downloadedById[s.video_id] = SongManager.Instance.downloadedSongPaths[j];
+            }
+
+            Debug.Log("Rebuilt downloadedById. Count = " + SongManager.Instance.downloadedById.Count);
         }
     }
 

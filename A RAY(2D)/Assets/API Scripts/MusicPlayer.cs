@@ -1,29 +1,113 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
+    private int currentIndex = 0;
+    private string lastPlayedPath = null;
+
+    //Local list of paths to play (so we can keep it functioning here)
+    private List<string> localPlaylist = new List<string>();
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
 
-        string firstSongPath = SongManager.Instance.downloadedSongPaths[0];
-        StartCoroutine(LoadAndPlay(firstSongPath));
+       // NEW: Build our own internal playlist using the already-working data
+        BuildLocalPlaylist();
+
+        PlayCurrentSong();
+    }
+
+    void BuildLocalPlaylist()
+    {
+        localPlaylist.Clear();
+
+        var playlist = SongManager.Instance.GetStoredSongs();
+        var paths = SongManager.Instance.downloadedSongPaths;
+
+        // Build playlist 1:1 with storedSongs
+        for (int i = 0; i < playlist.Count; i++)
+        {
+            if (i < paths.Count)
+            {
+                string p = paths[i];
+
+                // Normalize path
+                if (!Path.IsPathRooted(p))
+                {
+                    string projectRoot = Directory.GetParent(Application.dataPath).FullName;
+                    p = Path.Combine(projectRoot, p);
+                }
+
+                p = Path.GetFullPath(p);
+
+                Debug.Log("[DEBUG] Added normalized path to playlist: " + p);
+                localPlaylist.Add(p);
+            }
+            else
+            {
+                Debug.LogWarning("No path for song index: " + i);
+            }
+        }
+
+        Debug.Log("LOCAL PLAYLIST BUILT. Count = " + localPlaylist.Count);
+        Debug.Log("=== STORED SONGS ORDER ===");
+        for (int i = 0; i < playlist.Count; i++)
+        {
+            Debug.Log(i + ": " + playlist[i].title + " (" + playlist[i].video_id + ")");
+        }
+        currentIndex = 0;
+    }
+
+    void PlayCurrentSong()
+    {
+        Debug.Log("PlayCurrentSong() called. Index = " + currentIndex + " / Count = " + localPlaylist.Count);
+
+        if (localPlaylist.Count == 0)
+            return;
+
+        if (currentIndex < 0 || currentIndex >= localPlaylist.Count)
+            return;
+
+        string path = localPlaylist[currentIndex];
+
+        Debug.Log("[DEBUG] Raw playlist path: " + path);
+
+        if (string.IsNullOrEmpty(path))
+        {
+            Debug.LogWarning("Path is null or empty, skipping...");
+            PlayNextSong();
+            return;
+        }
+
+        // FIX: Compare paths, not clip names
+        Debug.Log("[DEBUG] Duplicate check: lastPlayedPath=" + lastPlayedPath + " | current=" + path);
+
+        if (lastPlayedPath == path)
+        {
+            Debug.Log("[DEBUG] Duplicate detected — resetting AudioSource");
+            audioSource.Stop();
+            audioSource.clip = null;
+        }
+
+        StartCoroutine(LoadAndPlay(path));
     }
 
     IEnumerator LoadAndPlay(string path)
     {
-
+        // Normalize path
         if (!Path.IsPathRooted(path))
         {
             string projectRoot = Directory.GetParent(Application.dataPath).FullName;
             path = Path.Combine(projectRoot, path);
         }
+        Debug.Log("Attempting to load path: " + path);
 
         if (!File.Exists(path))
         {
@@ -32,6 +116,7 @@ public class MusicPlayer : MonoBehaviour
         }
 
         string uri = new System.Uri(path).AbsoluteUri;
+        Debug.Log("[DEBUG] URI used for loading: " + uri);
 
         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.MPEG))
         {
@@ -47,13 +132,55 @@ public class MusicPlayer : MonoBehaviour
                     yield break;
                 }
 
+                Debug.Log("[DEBUG] Clip loaded successfully. Length=" + clip.length);
+
+                audioSource.Stop();
                 audioSource.clip = clip;
                 audioSource.Play();
+
+                Debug.Log("[DEBUG] Now playing clip. isPlaying=" + audioSource.isPlaying);
+
+                // Update last played path
+                lastPlayedPath = path;
+                Debug.Log("[DEBUG] Updated lastPlayedPath=" + lastPlayedPath);
+
+                StartCoroutine(WaitForSongToEnd(clip.length));
             }
             else
             {
                 Debug.LogError("There is something wrong with www: " + www.error);
             }
         }
+    }
+
+    IEnumerator WaitForSongToEnd(float duration)
+    {
+        Debug.Log("[DEBUG] Waiting for song to finish. Duration=" + duration);
+
+        // Wait for the duration of the clip
+        yield return new WaitForSeconds(duration);
+
+        // Small buffer to ensure playback is truly finished
+        yield return new WaitForSeconds(0.1f);
+
+        Debug.Log("[DEBUG] Song finished — calling PlayNextSong()");
+        PlayNextSong();
+    }
+
+    void PlayNextSong()
+    {
+        Debug.Log("[DEBUG] Advancing to next song. Old index=" + currentIndex);
+
+        currentIndex++;
+
+        // NEW: Use our local playlist count
+        if (currentIndex >= localPlaylist.Count)
+        {
+            Debug.Log("End of playlist.");
+            return;
+        }
+
+        Debug.Log("[DEBUG] New index=" + currentIndex);
+        PlayCurrentSong();
     }
 }
