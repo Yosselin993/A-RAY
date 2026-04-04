@@ -21,6 +21,7 @@ public class SongManager : MonoBehaviour
     public Dictionary<string, string> downloadedById = new Dictionary<string, string>();
 
     public int maxsonglist = 8;
+    public int minsonglist = 5;
 
     public List<SongSuggestion> GetStoredSongs()
     {

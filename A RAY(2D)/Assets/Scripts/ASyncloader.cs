@@ -13,6 +13,13 @@ public class ASnycloader : MonoBehaviour
     [SerializeField] private Slider loadingSlider;
     public void LoadLevelBtn(string levelToLoad)
     {
+        //Require at least 5 songs before entering the game
+    if (SongManager.Instance.GetStoredSongs().Count < SongManager.Instance.minsonglist)
+    {
+        Debug.Log("You must select at least 5 songs before entering the game.");
+        return; // Block loading
+    }
+
         MusicPlayer.SetActive(false);
         loadingScreen.SetActive(true);
 
