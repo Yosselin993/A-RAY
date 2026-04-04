@@ -79,7 +79,7 @@ public class SongManager : MonoBehaviour
 
         storedSongs.Add(selectedSong);
         RefreshStoredSongsUI();
-        selectedSong = null;
+        //selectedSong = null; // with this removed you can now click on the same song and keep adding it untill you search for another
     }
 
     // void RefreshStoredSongsUI()

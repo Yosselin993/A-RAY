@@ -39,7 +39,7 @@ public class AutocompleteController : MonoBehaviour
             return;
         }
         // If the user is typing something valid, show the dropdown panel
-        suggestionContainer.gameObject.SetActive(true); // show when user is typing song
+        //suggestionContainer.gameObject.SetActive(true); // show when user is typing song
 
         // Start a delayed search coroutine (adds a small delay before searching) (will change this part)
         typingCoroutine = StartCoroutine(DelayedSearch(text));
@@ -81,6 +81,8 @@ public class AutocompleteController : MonoBehaviour
 
         int count = Mathf.Min(3, suggestions.Count);
 
+        suggestionContainer.gameObject.SetActive(true);
+
         for (int i = 0; i < count; i++)
         {
             var s = suggestions[i];
@@ -90,11 +92,12 @@ public class AutocompleteController : MonoBehaviour
 
             obj.GetComponent<Button>().onClick.AddListener(() =>
             {
-                searchInput.text = s.title + " - " + s.artist;
-
+                //searchInput.text = s.title + " - " + s.artist;
+                searchInput.SetTextWithoutNotify(s.title + " - " + s.artist); //updated so the dropdown doesn't keep appearing
                 SongManager.Instance.SetSelectedSong(s);
 
                 ClearSuggestions();
+                suggestionContainer.gameObject.SetActive(false); //This will hide the suggestionContainer when the user selects a song.
             });
         }
     }
