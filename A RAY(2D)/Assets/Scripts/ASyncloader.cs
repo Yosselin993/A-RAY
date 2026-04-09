@@ -23,6 +23,11 @@ public class ASnycloader : MonoBehaviour
         MusicPlayer.SetActive(false);
         loadingScreen.SetActive(true);
 
+        if(loadingSlider != null)
+            loadingSlider.value = 0f; //manually set the the progress to 0 if theres nothing to load
+
+
+
         StartCoroutine(BeginLoad(levelToLoad));
     }
 
@@ -40,7 +45,12 @@ public class ASnycloader : MonoBehaviour
         while (!loadOperation.isDone)
         {
         float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
-        loadingSlider.value = progressValue;
+
+        if (loadingSlider != null)
+            {
+                //manually set the the progress of the game scene stuff to load to take up 20% of the silder
+                 loadingSlider.value = 0.8f + (progressValue * 0.2f);
+            }
         yield return null;
         }
     }
@@ -105,10 +115,14 @@ public class ASnycloader : MonoBehaviour
             }
 
             // // update slider
-            // if (loadingSlider != null)
-            // {
-            //     loadingSlider.value = (float)(i + 1) / totalSongs;
-            // }
+            //if the loadingSliler isnot equal to null
+            if (loadingSlider != null)
+            {
+                //I created a new variable that will track the progress of the downloading songs
+                float downloadprogress = (float)(i + 1) / totalSongs;
+                loadingSlider.value = downloadprogress * 0.8f; //manually set the downloadprogress to take up 80% of the slider
+
+            }
 
             // REBUILD downloadedById now that downloadedSongPaths is populated
             var stored = SongManager.Instance.GetStoredSongs();
