@@ -7,6 +7,8 @@ public class MainMenuController : MonoBehaviour
     public GameObject difficultyPanel;
     private Difficulty selectedDifficulty;
 
+    public GameObject morePanel; // for 'More' Panel 
+
      void Start()
     {
         selectedDifficulty = GameManager.Instance.currentDifficulty;
@@ -52,6 +54,16 @@ public class MainMenuController : MonoBehaviour
     public void OpenMusicScene()
     {
         SceneManager.LoadScene("MusicSetup");
+    }
+
+    public void OpenMorePanel()
+    {
+        morePanel.SetActive(true);
+    }
+
+    public void CloseMorePanel()
+    {
+        morePanel.SetActive(false);
     }
 
    

@@ -34,6 +34,24 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // for difficulty button in main 
+        if (GameManager.Instance != null)
+        {
+            switch (GameManager.Instance.currentDifficulty)
+            {
+                case Difficulty.Easy:
+                    attackDamage = 3;
+                    break;
+
+                case Difficulty.Medium:
+                    attackDamage = 2;
+                    break;
+
+                case Difficulty.Hard:
+                    attackDamage = 1;
+                    break;
+            }
+        }
         body = GetComponent<Rigidbody2D>();
 
         UpdateAttackPointPosition(); // makes sure the atatck point is on the right side

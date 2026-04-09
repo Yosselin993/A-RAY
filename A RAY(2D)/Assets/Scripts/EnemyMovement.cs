@@ -29,6 +29,29 @@ public class EnemyMovement : MonoBehaviour
         if (p != null) 
             player = p.transform;
             playerHealth = p.GetComponent<PlayerHealth>();
+
+        // for difficulty button in main 
+        float baseSpeed = speed;
+
+        if (GameManager.Instance != null)
+        {
+            switch (GameManager.Instance.currentDifficulty)
+            {
+                case Difficulty.Easy:
+                    speed = baseSpeed - 0.5f;
+                    break;
+
+                case Difficulty.Medium:
+                    speed = baseSpeed;
+                    break;
+
+                case Difficulty.Hard:
+                    speed = baseSpeed + 0.5f;
+                    break;
+            }
+        }
+
+        if (speed < 0.5f) speed = 0.5f;
     }
 
     void FixedUpdate()

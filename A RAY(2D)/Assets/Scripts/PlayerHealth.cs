@@ -24,6 +24,24 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        // for difficulty button in main 
+        if (GameManager.Instance != null)
+        {
+            switch (GameManager.Instance.currentDifficulty)
+            {
+                case Difficulty.Easy:
+                    maxHealth = 8;
+                    break;
+
+                case Difficulty.Medium:
+                    maxHealth = 6;
+                    break;
+
+                case Difficulty.Hard:
+                    maxHealth = 4;
+                    break;
+            }
+        }
         currentHealth = maxHealth;
     }
 

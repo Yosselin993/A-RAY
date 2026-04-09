@@ -6,6 +6,8 @@ public class Enemy_Combat : MonoBehaviour
     public float attackCooldown = 1f;
     private float lastAttackTime;
 
+    private int baseDamage; // for difficulty
+
     // enemy attack range, feedback 
     [Header("Attack Range")]
     public Transform attackPoint; // this is for the point of where the enemy attack is centered
@@ -14,6 +16,30 @@ public class Enemy_Combat : MonoBehaviour
 
     // we kind of want this like the PlayerMovement.cs soooo
     private bool isAttacking = false; 
+
+    void Start()
+    {
+        // for difficulty button in main 
+        baseDamage = damage;
+
+        if (GameManager.Instance != null)
+        {
+            switch (GameManager.Instance.currentDifficulty)
+            {
+                case Difficulty.Easy:
+                    damage = baseDamage;
+                    break;
+
+                case Difficulty.Medium:
+                    damage = baseDamage;
+                    break;
+
+                case Difficulty.Hard:
+                    damage = baseDamage + 1;
+                    break;
+            }
+        }
+    }
 
     public void StartAttack()
     {
