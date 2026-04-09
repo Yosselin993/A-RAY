@@ -59,6 +59,13 @@ public class PlayerHealth : MonoBehaviour
             isDead = true; //died
             Debug.Log("Player died"); // shows on console 
             // gameover.OpenGameoverPanel();
+            
+            // Saves this run to leaderboard
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SaveCurrentRunToLeaderboard();
+            }
+
             gameObject.SetActive(false);
             if (gameover != null)
             {
