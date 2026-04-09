@@ -48,6 +48,7 @@ public class AutocompleteController : MonoBehaviour
     IEnumerator DelayedSearch(string text)
     {
         yield return new WaitForSeconds(typingDelay);
+        //yield return new WaitForSecondsRealtime(typingDelay);
 
         if (string.IsNullOrWhiteSpace(text))
         {
