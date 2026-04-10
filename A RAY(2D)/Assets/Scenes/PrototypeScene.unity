@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
   currentHealth: 3
+  scoreValue: 100
 --- !u!114 &6071037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,6 +2044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 4
   currentHealth: 4
+  scoreValue: 100
 --- !u!114 &665927099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4869,6 +4871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
   currentHealth: 3
+  scoreValue: 100
 --- !u!222 &1722441859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4971,6 +4974,7 @@ GameObject:
   - component: {fileID: 1795801451}
   - component: {fileID: 1795801452}
   - component: {fileID: 1795801453}
+  - component: {fileID: 1795801454}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -5181,6 +5185,21 @@ MonoBehaviour:
   anim: {fileID: 0}
   deathDelay: 1
   gameover: {fileID: 2737815}
+--- !u!114 &1795801454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795801446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87010b0ee71eee543b65dcce155e1cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLook
+  animator: {fileID: 1795801452}
+  outfit1: {fileID: 9100000, guid: 736b6450735f5274f893885c701673b4, type: 2}
+  outfit2: {fileID: 9100000, guid: 02a29f4a45bb7e849ae536d8aad31c82, type: 2}
 --- !u!1 &1800043196
 GameObject:
   m_ObjectHideFlags: 0
