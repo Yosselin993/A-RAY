@@ -63,7 +63,11 @@ public class ASnycloader : MonoBehaviour
             yield break;
         }
 
-        SongManager.Instance.downloadedSongPaths.Clear();
+        //SongManager.Instance.downloadedSongPaths.Clear();
+        SongManager.Instance.downloadedSongs.Clear();
+        SongManager.Instance.downloadedById.Clear();
+        SongManager.Instance.genreById.Clear();
+
         var songs = SongManager.Instance.GetStoredSongs();
 
         if (songs == null || songs.Count == 0)
@@ -103,9 +107,10 @@ public class ASnycloader : MonoBehaviour
                     DownloadSongResponse response = JsonUtility.FromJson<DownloadSongResponse>(request.downloadHandler.text);
                     if (response != null && !string.IsNullOrEmpty(response.path))
                     {
-                        SongManager.Instance.AddDownloadedSongPath(response.path);
+                        SongManager.Instance.AddDownloadedSongPath(response.path, response.genre); //adding genre to the premeters 
                         Debug.Log("Stored downloaded path: " + response.path);
-                        Debug.Log("Total downloaded songs in SongManager: " + SongManager.Instance.downloadedSongPaths.Count);
+                        Debug.Log("Stored genre: " + response.genre); //added debug to see if genre go stored
+                        Debug.Log("Total downloaded songs in SongManager: " + SongManager.Instance.downloadedSongs.Count);
                     }
                     else
                     {
@@ -129,8 +134,13 @@ public class ASnycloader : MonoBehaviour
             for (int j = 0; j < stored.Count; j++)
             {
                 var s = stored[j];
-                if (s != null && j < SongManager.Instance.downloadedSongPaths.Count)
-                    SongManager.Instance.downloadedById[s.video_id] = SongManager.Instance.downloadedSongPaths[j];
+                //if (s != null && j < SongManager.Instance.downloadedSongPaths.Count)
+                    //SongManager.Instance.downloadedById[s.video_id] = SongManager.Instance.downloadedSongPaths[j];
+                if (s != null && j < SongManager.Instance.downloadedSongs.Count)
+                {
+                    SongManager.Instance.downloadedById[s.video_id] = SongManager.Instance.downloadedSongs[j].path;
+                    SongManager.Instance.genreById[s.video_id] = SongManager.Instance.downloadedSongs[j].genre;
+                }
             }
 
             Debug.Log("Rebuilt downloadedById. Count = " + SongManager.Instance.downloadedById.Count);
@@ -152,6 +162,7 @@ public class ASnycloader : MonoBehaviour
     {
         public string status;
         public string path;
+        public string genre; //added to the class list
         public string message;
     }
 

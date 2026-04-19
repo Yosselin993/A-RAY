@@ -12,7 +12,9 @@ public class MusicPlayer : MonoBehaviour
     private string lastPlayedPath = null;
 
     //Local list of paths to play (so we can keep it functioning here)
-    private List<string> localPlaylist = new List<string>();
+    //private List<string> localPlaylist = new List<string>();
+    private List<DownloadedSong> localPlaylist = new List<DownloadedSong>();
+
 
     void Start()
     {
@@ -29,14 +31,18 @@ public class MusicPlayer : MonoBehaviour
         localPlaylist.Clear();
 
         var playlist = SongManager.Instance.GetStoredSongs();
-        var paths = SongManager.Instance.downloadedSongPaths;
+        //var paths = SongManager.Instance.downloadedSongPaths;
+        var paths = SongManager.Instance.downloadedSongs;
 
         // Build playlist 1:1 with storedSongs
         for (int i = 0; i < playlist.Count; i++)
         {
             if (i < paths.Count)
             {
-                string p = paths[i];
+                var song = paths[i];
+                //string p = paths[i];
+                string p = song.path;
+                string genre = song.genre;
 
                 // Normalize path
                 if (!Path.IsPathRooted(p))
@@ -48,7 +54,9 @@ public class MusicPlayer : MonoBehaviour
                 p = Path.GetFullPath(p);
 
                 Debug.Log("[DEBUG] Added normalized path to playlist: " + p);
-                localPlaylist.Add(p);
+                Debug.Log("Genre is: " + genre);
+                //localPlaylist.Add(p);
+                localPlaylist.Add(new DownloadedSong(p, genre));
             }
             else
             {
@@ -75,7 +83,11 @@ public class MusicPlayer : MonoBehaviour
         if (currentIndex < 0 || currentIndex >= localPlaylist.Count)
             return;
 
-        string path = localPlaylist[currentIndex];
+        //string path = localPlaylist[currentIndex];
+        var song = localPlaylist[currentIndex];
+        string path = song.path;
+        string genre = song.genre;
+
 
         Debug.Log("[DEBUG] Raw playlist path: " + path);
 
