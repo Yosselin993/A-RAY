@@ -9,15 +9,24 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 100; // how many points this enemy gives
 
     private int baseMaxHealth;   // stores the original health set in Inspector
-    private bool hasGivenScore = false; // prevents score from being added twice
+    private bool hasGivenScore = false; // prevents score from being added twice per life
+    private bool initializedBaseHealth = false;
 
-
-    void Start()
+    void OnEnable()
     {
-        baseMaxHealth = maxHealth;
+        // Save the original inspector health only once
+        if (!initializedBaseHealth)
+        {
+            baseMaxHealth = maxHealth;
+            initializedBaseHealth = true;
+        }
+
+        // baseMaxHealth = maxHealth;
 
          // Reset score flag
         hasGivenScore = false;
+
+        maxHealth = baseMaxHealth;
 
         // for difficulty button in main 
         if (GameManager.Instance != null)
@@ -57,10 +66,13 @@ public class EnemyHealth : MonoBehaviour
             {
                 GameManager.Instance.AddScore(scoreValue);
                 hasGivenScore = true;
+
+                Debug.Log(gameObject.name + " gave score: " + scoreValue); //debug
             }
 
             // respawn
             GetComponent<EnemyRespawn>().Die();
+            GetComponent<EnemyHealth>().OnEnable(); // resets the scoring 
         }
         
     }
