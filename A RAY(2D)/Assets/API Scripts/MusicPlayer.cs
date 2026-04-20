@@ -14,7 +14,7 @@ public class MusicPlayer : MonoBehaviour
     //Local list of paths to play (so we can keep it functioning here)
     //private List<string> localPlaylist = new List<string>();
     private List<DownloadedSong> localPlaylist = new List<DownloadedSong>();
-
+    public BackgroundChanger backgroundChanger; //added from Backgroundchanger script
 
     void Start()
     {
@@ -87,6 +87,17 @@ public class MusicPlayer : MonoBehaviour
         var song = localPlaylist[currentIndex];
         string path = song.path;
         string genre = song.genre;
+
+        if(backgroundChanger != null)
+        {
+            backgroundChanger.ChangeBackground(genre); //calling the ChangeBackground function from Background script that takes the genre
+        }
+        else
+        {
+            Debug.Log("Backgroundchanger is not assigned in Musicplayer.");
+        }
+
+
 
 
         Debug.Log("[DEBUG] Raw playlist path: " + path);
