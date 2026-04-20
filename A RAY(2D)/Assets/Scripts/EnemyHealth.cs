@@ -71,7 +71,8 @@ public class EnemyHealth : MonoBehaviour
             }
 
             // respawn
-            GetComponent<EnemyRespawn>().Die();
+            GetComponent<EnemyRespawn>().Die(); // repawn is better 
+            // Destroy(gameObject); // this is for prefab testing
             GetComponent<EnemyHealth>().OnEnable(); // resets the scoring 
         }
         

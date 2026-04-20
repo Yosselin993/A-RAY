@@ -5,6 +5,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Chase Settings")]
     public float speed = 3f;
     public float detectionRadius = 8f;   // enemy only chases if player is close enough
+    public float loseInterestRadius = 15f; // chasing, enemy will stop if player is this far
     //public float stopDistance = 0.2f;    // enemy stops when very close (prevents jitter)
     // have to connect this part with Enemy_Combat
     public float attackRange = 1.2f; // distance at which enemy attacks 
@@ -16,6 +17,8 @@ public class EnemyMovement : MonoBehaviour
     PlayerHealth playerHealth;
     Rigidbody2D rb;
 
+    private bool isAggro = false; // this is for when the enemy sees the player, itll keep followings
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,9 +29,11 @@ public class EnemyMovement : MonoBehaviour
         GameObject p = GameObject.FindGameObjectWithTag("Player");
 
         // if player exists, store ref. to its transfrorm and health
-        if (p != null) 
+        if (p != null)
+        {
             player = p.transform;
             playerHealth = p.GetComponent<PlayerHealth>();
+        }
 
         // for difficulty button in main 
         float baseSpeed = speed;
@@ -56,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // if player ref is missing
+        // if player ref is missing, stop
         if (player == null)
         {
             // // Try to reacquire player 
@@ -79,11 +84,32 @@ public class EnemyMovement : MonoBehaviour
 // 
         float dist = Vector2.Distance(rb.position, player.position); // calculating distance between player and enemy
 
-        // if player is outside detection, enemy does nothing
-        if (dist > detectionRadius)
+        // // if player is outside detection, enemy does nothing
+        // if (dist > detectionRadius)
+        // {
+        //     rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        //     anim.SetFloat("horizontalInput", 0);
+        //     return;
+        // }
+
+        // now if enemy has not noticed player yet, check normal dection range
+        if (!isAggro && dist <= detectionRadius)
+        {
+            isAggro = true;
+        }
+        // if enemy is already chasing, only stop if player gets muchhhh father away
+        if ( isAggro && dist > loseInterestRadius)
+        {
+            isAggro = false; 
+        }
+        // if not aggressive right now, stay idle
+        if (!isAggro)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-            anim.SetFloat("horizontalInput", 0);
+
+            if (anim != null)
+                anim.SetFloat("horizontalInput", 0);
+
             return;
         }
 
