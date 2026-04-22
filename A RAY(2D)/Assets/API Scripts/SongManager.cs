@@ -37,9 +37,10 @@ public class SongManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("[SongManager] Created new persistent instance");
         }
-        else
-        {
+        if(Instance != this){
+            Debug.LogWarning("[SongManager] Duplicate instance detected — destroying this one");
             Destroy(gameObject);
         }
     }
@@ -48,6 +49,7 @@ public class SongManager : MonoBehaviour
     public void SetSelectedSong(SongSuggestion song)
     {
         selectedSong = song;
+        Debug.Log("[SongManager] Selected song set to: " + song.title + " - " + song.artist);
     }
 
     // public void AddSelectedSong()
@@ -71,6 +73,13 @@ public class SongManager : MonoBehaviour
 
     public void AddSelectedSong()
     {
+        Debug.Log("[SongManager] AddSelectedSong() called");
+        if (selectedSong == null)
+        {
+            Debug.LogWarning("[SongManager] selectedSong is NULL — user clicked Add before selecting a suggestion");
+            return;
+        }
+        Debug.Log("[SongManager] Current storedSongs count BEFORE adding: " + storedSongs.Count);
         if (storedSongs.Count >= maxsonglist)
         {
             Debug.Log("Can only select up to 8 songs");
@@ -78,6 +87,8 @@ public class SongManager : MonoBehaviour
         }
 
         storedSongs.Add(selectedSong);
+        Debug.Log("[SongManager] Added song: " + selectedSong.title + " - " + selectedSong.artist);
+        Debug.Log("[SongManager] storedSongs count AFTER adding: " + storedSongs.Count);
         RefreshStoredSongsUI();
         //selectedSong = null; // with this removed you can now click on the same song and keep adding it untill you search for another
     }
@@ -103,8 +114,9 @@ public class SongManager : MonoBehaviour
 
 
 
-    void RefreshStoredSongsUI()
+    public void RefreshStoredSongsUI()
     {
+        Debug.Log("[SongManager] RefreshStoredSongsUI() — rebuilding UI with " + storedSongs.Count + " songs");
         foreach (Transform child in storedSongsContainer)
         {
             Destroy(child.gameObject);
@@ -112,6 +124,7 @@ public class SongManager : MonoBehaviour
 
       foreach (var song in storedSongs)
       {
+            Debug.Log("[SongManager] Creating UI row for: " + song.title);
             GameObject obj = Instantiate(storedSongPrefab, storedSongsContainer);
 
             TMP_Text textComponent = obj.GetComponentInChildren<TMP_Text>();
@@ -184,6 +197,21 @@ public class SongManager : MonoBehaviour
             downloadedSongPaths.Add(path);
             Debug.Log("[SongManager] Added downloaded path: " + path + " (total now: " + downloadedSongPaths.Count + ")");
         }
+    }
+
+    public void ResetAllSongData()
+    {
+        Debug.Log("[SongManager] ResetAllSongData() called — clearing playlist and downloads");
+
+        Debug.Log("[SongManager] storedSongs BEFORE clear: " + storedSongs.Count);
+        storedSongs.Clear();
+        Debug.Log("[SongManager] storedSongs AFTER clear: " + storedSongs.Count);
+        selectedSong = null;
+        downloadedSongPaths.Clear();
+        downloadedById.Clear();
+
+        if (storedSongsContainer != null)
+            RefreshStoredSongsUI();
     }
 
 }

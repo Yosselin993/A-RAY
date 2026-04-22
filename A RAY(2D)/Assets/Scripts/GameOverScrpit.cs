@@ -18,7 +18,10 @@ public class GameOverScrpit : MonoBehaviour
     public void Restart_mm()
     {
         Time.timeScale = 1f; // this unpauses before reloading
-
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetScore();
+        }
         // GameOverPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -26,6 +29,8 @@ public class GameOverScrpit : MonoBehaviour
     public void Quit_mmm()
     {
         Time.timeScale = 1f; // this unpauses before going to the menu
+        GameManager.Instance.ResetAllGameData();
+        SongManager.Instance.ResetAllSongData();
         SceneManager.LoadScene("Main Menu");
     }
 }

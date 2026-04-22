@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class SuggestionItem : MonoBehaviour
@@ -9,6 +10,14 @@ public class SuggestionItem : MonoBehaviour
     private string title;
     private string artist;
 
+    private void Awake()
+    {
+        // Ensure the button always has the OnClick listener
+        Button btn = GetComponent<Button>();
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(OnClick);
+    }
+    
     public void Setup(string title, string videoId, string artist)
     {
         this.title = title;

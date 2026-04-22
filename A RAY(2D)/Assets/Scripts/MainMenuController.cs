@@ -94,10 +94,10 @@ public class MainMenuController : MonoBehaviour
             SetPlayerNickname(nicknameInput.text);
         }
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.ResetScore();
-        }
+        // if (GameManager.Instance != null)
+        // {
+        //     GameManager.Instance.ResetScore();
+        // }
 
         SceneManager.LoadScene("PrototypeScene");
     }
