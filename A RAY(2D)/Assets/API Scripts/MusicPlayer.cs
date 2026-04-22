@@ -144,7 +144,7 @@ public class MusicPlayer : MonoBehaviour
                 lastPlayedPath = path;
                 Debug.Log("[DEBUG] Updated lastPlayedPath=" + lastPlayedPath);
 
-                StartCoroutine(WaitForSongToEnd(MathF.Min(60f, clip.length)));
+                StartCoroutine(WaitForSongToEnd(Mathf.Min(60f, clip.length)));
             }
             else
             {

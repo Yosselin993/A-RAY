@@ -23,7 +23,7 @@ public class GameOverScrpit : MonoBehaviour
             GameManager.Instance.ResetScore();
         }
         // GameOverPanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MusicSetup");
     }
 
     public void Quit_mmm()
