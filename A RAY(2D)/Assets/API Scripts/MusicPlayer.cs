@@ -87,6 +87,7 @@ public class MusicPlayer : MonoBehaviour
         var song = localPlaylist[currentIndex];
         string path = song.path;
         string genre = song.genre;
+        Debug.Log("PLAYING SONG WITH GENRE: " + genre);
 
         if(backgroundChanger != null)
         {

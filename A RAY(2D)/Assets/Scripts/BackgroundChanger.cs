@@ -9,12 +9,16 @@ public class BackgroundChanger : MonoBehaviour
     public class background
     {
         public string genre;
-        public Sprite backgroundSprites;
+        // public Sprite backgroundSprites;
+        //change to fix the prefab backgrounds
+        public GameObject backgroundPrefabs;
     }
 
-    public Image backgroundImage;
+    // public Image backgroundImage;
+    public Transform backgroundspawn;
     public background[] genreBackgrounds;
-    public Sprite defultBackground;
+    public GameObject defaultBackground;
+     private GameObject currentBackground;
 
 
     public void ChangeBackground(string genre)
@@ -32,7 +36,7 @@ public class BackgroundChanger : MonoBehaviour
         {
             if (cleanGenre.Contains(item.genre.ToLower()))
             {
-                backgroundImage.sprite = item.backgroundSprites;
+                SpawnBackground(item.backgroundPrefabs);
                 Debug.Log("The background has changed for genre " + genre);
                 return;
             }
@@ -41,9 +45,35 @@ public class BackgroundChanger : MonoBehaviour
 
     }
 
+    void SpawnBackground(GameObject prefab)
+    {
+        Debug.Log("Spawning prefab: " + prefab.name);
+        if (prefab == null)
+        {
+            Debug.LogWarning("Prefab is null.");
+            return;
+        }
+
+        // remove old background
+        if (currentBackground != null)
+        {
+            Destroy(currentBackground);
+        }
+
+        // create new one
+        currentBackground = Instantiate(prefab, backgroundspawn);
+
+        currentBackground.transform.localPosition = Vector3.zero;
+        currentBackground.transform.localRotation = Quaternion.identity;
+        currentBackground.transform.localScale = Vector3.one;
+    }
+
+
+
+
     void setDefultBackground()
     {
-        backgroundImage.sprite = defultBackground;
+        SpawnBackground(defaultBackground);
         Debug.Log("No genre was given so defult background was applied");
     }
 

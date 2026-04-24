@@ -1504,6 +1504,55 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!1 &353938130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353938132}
+  - component: {fileID: 353938131}
+  m_Layer: 0
+  m_Name: BackgroundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &353938131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353938130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fd3de02f8a1434389031774069d43c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundChanger
+  backgroundspawn: {fileID: 1818887633}
+  genreBackgrounds:
+  - genre: rock
+    backgroundPrefabs: {fileID: 3296003276242923652, guid: 5e41a91a63aa62b47b5ab78a153096f7, type: 3}
+  defaultBackground: {fileID: 7213611237847082710, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
+--- !u!4 &353938132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353938130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.15708, y: 0.6412, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &365014842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,68 +1765,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379507003}
   m_CullTransparentMesh: 1
---- !u!1001 &402876865
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1866113432}
-    m_Modifications:
-    - target: {fileID: 7213611237847082710, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_Name
-      value: ForestWC
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
---- !u!4 &402876866 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8894451705467621524, guid: 693e18f4932311f4c9dafb82f7d11524, type: 3}
-  m_PrefabInstance: {fileID: 402876865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &408522970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,7 +3621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925b5212c59e9524bbc2bd292a6c0552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicPlayer
-  backgroundChanger: {fileID: 0}
+  backgroundChanger: {fileID: 353938131}
 --- !u!82 &1252791882
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3859,63 +3846,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 18, y: 2.33}
   m_EdgeRadius: 0
---- !u!1 &1361111243
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1361111245}
-  - component: {fileID: 1361111244}
-  m_Layer: 0
-  m_Name: BackgroundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1361111244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361111243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fd3de02f8a1434389031774069d43c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BackgroundChanger
-  backgroundImage: {fileID: 0}
-  genreBackgrounds:
-  - genre: 
-    backgroundSprites: {fileID: 0}
-  - genre: 
-    backgroundSprites: {fileID: 0}
-  - genre: 
-    backgroundSprites: {fileID: 0}
-  - genre: 
-    backgroundSprites: {fileID: 0}
-  - genre: 
-    backgroundSprites: {fileID: 0}
-  defultBackground: {fileID: 0}
---- !u!4 &1361111245
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361111243}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.98462, y: 1.35029, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1363344538
 GameObject:
   m_ObjectHideFlags: 0
@@ -5383,6 +5313,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800043196}
   m_CullTransparentMesh: 1
+--- !u!1 &1818887632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818887633}
+  m_Layer: 0
+  m_Name: Backgroundspawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1818887633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818887632}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.15708, y: 0.6412, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861941707
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,38 +5481,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861941707}
   m_CullTransparentMesh: 1
---- !u!1 &1866113431
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1866113432}
-  m_Layer: 0
-  m_Name: ForestBG WorldChuck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1866113432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866113431}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 402876866}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1927351297
 GameObject:
   m_ObjectHideFlags: 0
@@ -6629,5 +6558,5 @@ SceneRoots:
   - {fileID: 1021873801}
   - {fileID: 2737816}
   - {fileID: 1252791883}
-  - {fileID: 1361111245}
-  - {fileID: 1866113432}
+  - {fileID: 1818887633}
+  - {fileID: 353938132}
