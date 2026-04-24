@@ -144,4 +144,11 @@ public class GameManager : MonoBehaviour
             leaderboard = new LeaderboardData();
         }
     }
+
+    public void ResetAllGameData()
+    {
+        // Clear score
+        currentScore = 0;
+        currentNickname = "Player";
+    }
 }
