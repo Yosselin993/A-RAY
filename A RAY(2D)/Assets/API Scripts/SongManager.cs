@@ -2,6 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+//I made this class so we can group song data together that way we dont mix things around. Also, it just looks cleaner 
+[System.Serializable]
+public class DownloadedSong
+{
+    public string path; //stores the loacl file path of the downloaded song
+    public string genre; //stores the genre of the song that was downloaded 
+
+
+    public DownloadedSong(string path, string genre) //The constructor of the class.
+    {
+        this.path = path;
+        this.genre = genre;
+    }
+}
+
+
+
 public class SongManager : MonoBehaviour
 {
     public static SongManager Instance;
@@ -15,10 +33,17 @@ public class SongManager : MonoBehaviour
 
     private SongSuggestion selectedSong;
 
-    public List<string> downloadedSongPaths = new List<string>();
+    //public List<string> downloadedSongPaths = new List<string>();
+    //it stores the downloaded songs as a object instead of just a file path.
+    //will no longer only contain the file path but also the genre together 
+    public List<DownloadedSong> downloadedSongs = new List<DownloadedSong>();
+
     private List<SongSuggestion> storedSongs = new List<SongSuggestion>();
     // Track downloaded songs by video_id
     public Dictionary<string, string> downloadedById = new Dictionary<string, string>();
+    //this will store the genre for each song using its voideo ID
+    //this way we can lookup the genre quicker without searching through the list.
+    public Dictionary<string, string> genreById = new Dictionary<string, string>();
 
     public int maxsonglist = 8;
     public int minsonglist = 5;
@@ -183,7 +208,7 @@ public class SongManager : MonoBehaviour
     // }
 
 
-    public void AddDownloadedSongPath(string path)
+    public void AddDownloadedSongPath(string path, string genre) //added genre to the parameters to take both path and genre of song
     {
     //     if (!downloadedSongPaths.Contains(path))
     // {
@@ -194,8 +219,17 @@ public class SongManager : MonoBehaviour
         //}
         if (!string.IsNullOrEmpty(path))
         {
-            downloadedSongPaths.Add(path);
-            Debug.Log("[SongManager] Added downloaded path: " + path + " (total now: " + downloadedSongPaths.Count + ")");
+
+            //if the genre get return as empty return genre as unknown.
+            if (string.IsNullOrEmpty(genre))
+            {
+                genre = "unknown";
+            }
+
+            //downloadedSongPaths.Add(path);
+            downloadedSongs.Add(new DownloadedSong(path, genre)); //updated this line to include genre
+            Debug.Log("[SongManager] Added downloaded path: " + path + " (total now: " + downloadedSongs.Count + ")");
+            Debug.Log("Genre is: " + genre); //added debug to see the genre in terminal
         }
     }
 
@@ -207,7 +241,7 @@ public class SongManager : MonoBehaviour
         storedSongs.Clear();
         Debug.Log("[SongManager] storedSongs AFTER clear: " + storedSongs.Count);
         selectedSong = null;
-        downloadedSongPaths.Clear();
+        downloadedSongs.Clear();//Clear old songs before adding new ones so nothing gets mixed up
         downloadedById.Clear();
 
         if (storedSongsContainer != null)
