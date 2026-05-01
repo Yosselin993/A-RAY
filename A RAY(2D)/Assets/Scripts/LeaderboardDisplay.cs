@@ -5,18 +5,20 @@ using System.Text;
 public class LeaderboardDisplay : MonoBehaviour
 {
     [Header("Leaderboard UI")]
-    public TMP_Text leaderboardText;
+    public TMP_Text leaderboardText; // displays the scoreboard
 
     void OnEnable()
     {
-        UpdateLeaderboard();
+        UpdateLeaderboard(); // when UI is active, refresh the LB display
     }
 
     public void UpdateLeaderboard()
     {
-        if (leaderboardText == null) return;
-        if (GameManager.Instance == null) return;
+        if (leaderboardText == null) return; // stop of the text box was not assigned in inspector, safety check
+        if (GameManager.Instance == null) return; // stop of the gamemaager does not exist, safty check
 
+        //  using StringBuilder becuase its used to build a longer string
+        //  better than using text += text
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine("SCOREBOARD");
@@ -29,7 +31,7 @@ public class LeaderboardDisplay : MonoBehaviour
         }
         else
         {
-            // Show top scores
+            // Show top scores, loops through each save LB and displays
             for (int i = 0; i < GameManager.Instance.leaderboard.entries.Count; i++)
             {
                 ScoreEntry entry = GameManager.Instance.leaderboard.entries[i];
@@ -37,6 +39,6 @@ public class LeaderboardDisplay : MonoBehaviour
             }
         }
 
-        leaderboardText.text = sb.ToString();
+        leaderboardText.text = sb.ToString(); // puts the finished text into the UI
     }
 }

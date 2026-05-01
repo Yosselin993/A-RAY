@@ -24,6 +24,7 @@ public class ScoreEntry
 
 // Wrapper so Unity can save/load the list as JSON
 // basically wraps a list of score entry object
+// Since unity JsonUtility doesnt save/load a raw list good by itself, we place the list inside a class
 [System.Serializable]
 public class LeaderboardData
 {
@@ -33,7 +34,7 @@ public class LeaderboardData
 
 public class GameManager : MonoBehaviour
 {
-   public static GameManager Instance;
+   public static GameManager Instance; // lets other scripts access the GameManger 
 
     [Header("Difficulty")]
     public Difficulty currentDifficulty = Difficulty.Medium;
@@ -55,14 +56,14 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // keeps the gameobject alive when switching scenes
 
             // Load saved leaderboard when game starts
             LoadLeaderboard();
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // if another gamemanager exists, destroy this one 
         }
     }
 
@@ -112,11 +113,13 @@ public class GameManager : MonoBehaviour
             leaderboard.entries.RemoveRange(5, leaderboard.entries.Count - 5); // keeps only top 5 scores
         }
 
-        SaveLeaderboard(); // saves updated leaderboard to disk
-        runSaved = true;
+        SaveLeaderboard(); // saves updated leaderboard to disk, perm.
+        runSaved = true; // marks as saved so it doesnt save again
     }
 
     // Save leaderboard as JSON into PlayerPrefs
+    // We are using JSON because unity can save strings easily with PlayerPrefs, so that the leaderboard object
+    // is converted into JSON text, saved, then converted back into an object when the game loads again.
     private void SaveLeaderboard()
     {
         string json = JsonUtility.ToJson(leaderboard); // converts LB object into JSON string
@@ -129,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("Leaderboard")) // if LB exist
         {
-            string json = PlayerPrefs.GetString("Leaderboard"); // get saved JSON string
+            string json = PlayerPrefs.GetString("Leaderboard"); // get saved JSON string text from PlayerPrefs
             leaderboard = JsonUtility.FromJson<LeaderboardData>(json); // convert JSON back into LB object
 
             // safty check, seeing if anything went wrong

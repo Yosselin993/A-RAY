@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class Enemy_Combat : MonoBehaviour
@@ -16,6 +17,7 @@ public class Enemy_Combat : MonoBehaviour
 
     // we kind of want this like the PlayerMovement.cs soooo
     private bool isAttacking = false; 
+    private bool hasDealtDamage = false; // should stop attacks before damage
 
     void Start()
     {
@@ -41,17 +43,30 @@ public class Enemy_Combat : MonoBehaviour
         }
     }
 
-    public void StartAttack()
+
+    // using bool for true or false
+    // true for enemy is allowedto attack, while false is for the cooldowwn is not ready
+    public bool StartAttack()
     {
+
+        if (isAttacking) return false;
+
         // if cooldown has not finished, stop
-        if (Time.time < lastAttackTime + attackCooldown) return;
+        if (Time.time < lastAttackTime + attackCooldown) return false;
 
         isAttacking = true;
+        hasDealtDamage = false;
+
+        lastAttackTime = Time.time; // cooldown when attack starts, not after damage
+        return true;
     }
 
     public void DealDamage()
     {
         if (!isAttacking) return;
+
+        if (hasDealtDamage) return; // prevents the dame attack from damaging multi times
+        hasDealtDamage = true;
 
         //if attack point is missing, stop
         if (attackPoint == null) return;
