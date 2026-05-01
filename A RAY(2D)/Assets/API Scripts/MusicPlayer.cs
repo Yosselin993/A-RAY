@@ -94,6 +94,10 @@ public class MusicPlayer : MonoBehaviour
 
         Debug.Log("[DEBUG] Raw playlist path: " + path);
 
+        //this is calling the function ChangeBackground from the Hashmap script 
+        FindObjectOfType<Hashmap>().ChangeBackground(genre);
+
+
         if (string.IsNullOrEmpty(path))
         {
             Debug.LogWarning("Path is null or empty, skipping...");

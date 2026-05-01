@@ -93,6 +93,10 @@ public class Hashmap : MonoBehaviour
             }
     
         }
+        //if the genre could not match any key at all, it will display the defaultBackground.
+        SetBackground(defaultBackground);
+        Debug.Log("The genre given by the API, did not match any of the keys in BG at all.");
+
     }
 
     //function purpose: its job it to destroy(remove) the current background and replace it with the next prefab's backgrounds 
