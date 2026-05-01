@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 5045047203801163742}
   - component: {fileID: 3157165536274106335}
   m_Layer: 0
-  m_Name: GraveyardWC
+  m_Name: rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
