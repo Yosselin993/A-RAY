@@ -1699,6 +1699,7 @@ MonoBehaviour:
   difficultyPanel: {fileID: 439155096}
   morePanel: {fileID: 1810003067}
   nicknameInput: {fileID: 0}
+  mainMenuButtons: {fileID: 2140943421}
 --- !u!4 &622451998
 Transform:
   m_ObjectHideFlags: 0

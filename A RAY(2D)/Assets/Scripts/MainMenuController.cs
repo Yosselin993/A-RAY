@@ -12,6 +12,8 @@ public class MainMenuController : MonoBehaviour
 
     public TMP_InputField nicknameInput; // would drag TMP input field here
 
+    public GameObject mainMenuButtons; //adding this so I can drag the "Main Menu Button" into the inspector
+
      void Start()
     {
         selectedDifficulty = GameManager.Instance.currentDifficulty;
@@ -23,8 +25,11 @@ public class MainMenuController : MonoBehaviour
         }
     }
     public void Exit(){
-       SceneManager.LoadScene("Main Menu");
+       //SceneManager.LoadScene("Main Menu");
        //Application.Quit();
+       settingPanel.SetActive(false);
+       mainMenuButtons.SetActive(true);
+
     }
 
       public void OpenDifficulty()

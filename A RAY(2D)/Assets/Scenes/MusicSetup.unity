@@ -570,9 +570,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongManager
   storedSongsContainer: {fileID: 1264864479}
   storedSongPrefab: {fileID: 3293297388049308475, guid: e958d83d8b6a5424788b709f4dbab569, type: 3}
-  downloadedSongPaths: []
+  downloadedSongs: []
   maxsonglist: 8
   minsonglist: 5
+  searchInput: {fileID: 1241273984}
 --- !u!4 &229031970
 Transform:
   m_ObjectHideFlags: 0

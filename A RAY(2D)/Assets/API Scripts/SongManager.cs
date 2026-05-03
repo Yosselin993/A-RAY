@@ -47,6 +47,7 @@ public class SongManager : MonoBehaviour
 
     public int maxsonglist = 8;
     public int minsonglist = 5;
+    public TMP_InputField searchInput; //this will hold the textbox in the inspector field 
 
     public List<SongSuggestion> GetStoredSongs()
     {
@@ -99,6 +100,15 @@ public class SongManager : MonoBehaviour
     public void AddSelectedSong()
     {
         Debug.Log("[SongManager] AddSelectedSong() called");
+
+        //checking if the textbox is empty(added a new variable called searchInput that holds the textbox in inspector).
+        if (string.IsNullOrWhiteSpace(searchInput.text))
+        {
+            Debug.LogWarning("[SongManager]Since textbox is empty. No song or empty box will be added to StoaredSongPanel");
+            selectedSong = null; //this will make sure the last song typed in the textbox is not remembered. So when you click on the add button with no text. Nothing SHOULD BE ADDED.
+            return;
+        }
+
         if (selectedSong == null)
         {
             Debug.LogWarning("[SongManager] selectedSong is NULL — user clicked Add before selecting a suggestion");
