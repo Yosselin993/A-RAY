@@ -22,6 +22,13 @@ public class GameOverScrpit : MonoBehaviour
         {
             GameManager.Instance.ResetScore();
         }
+
+        // Send label BEFORE loading the next scene for Data Collection
+        var dc = FindFirstObjectByType<DataCollector>();
+        if (dc != null){
+            dc.RecordFinalLabel(0);   // or 1
+        }
+        
         // GameOverPanel.SetActive(false);
         SceneManager.LoadScene("MusicSetup");
     }
@@ -31,6 +38,13 @@ public class GameOverScrpit : MonoBehaviour
         Time.timeScale = 1f; // this unpauses before going to the menu
         GameManager.Instance.ResetAllGameData();
         SongManager.Instance.ResetAllSongData();
+
+        // Send label BEFORE loading the next scene
+        var dc = FindFirstObjectByType<DataCollector>();
+        if (dc != null){
+            dc.RecordFinalLabel(0);   // or 1
+        }
+
         SceneManager.LoadScene("Main Menu");
     }
 }

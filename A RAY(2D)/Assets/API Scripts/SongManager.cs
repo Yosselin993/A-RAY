@@ -99,6 +99,9 @@ public class SongManager : MonoBehaviour
 
     public void AddSelectedSong()
     {
+        // FIX: reconnect searchInput if it was lost after scene reload
+        if (searchInput == null)
+            searchInput = FindFirstObjectByType<TMP_InputField>();
         Debug.Log("[SongManager] AddSelectedSong() called");
 
         //checking if the textbox is empty(added a new variable called searchInput that holds the textbox in inspector).
@@ -151,6 +154,16 @@ public class SongManager : MonoBehaviour
 
     public void RefreshStoredSongsUI()
     {
+        if (storedSongsContainer == null)
+        {
+            var go = GameObject.Find("StoredPenal");
+            if (go == null)
+            {
+                Debug.LogError("[SongManager] Could not find StoredSongsContainer in scene");
+                return;
+            }
+            storedSongsContainer = go.transform;
+        }
         Debug.Log("[SongManager] RefreshStoredSongsUI() — rebuilding UI with " + storedSongs.Count + " songs");
         foreach (Transform child in storedSongsContainer)
         {
@@ -256,6 +269,18 @@ public class SongManager : MonoBehaviour
 
         if (storedSongsContainer != null)
             RefreshStoredSongsUI();
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (storedSongsContainer == null)
+        {
+            var go = GameObject.Find("StoredPenal");
+            if (go != null)
+                storedSongsContainer = go.transform;
+        }
+
+        RefreshStoredSongsUI();
     }
 
 }
