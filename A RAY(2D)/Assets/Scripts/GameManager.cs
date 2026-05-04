@@ -117,6 +117,38 @@ public class GameManager : MonoBehaviour
         runSaved = true; // marks as saved so it doesnt save again
     }
 
+    //Win + Data Collector
+    public int EvaluateRunAndReturnLabel(bool survivedPlaylist)
+    {
+        // 1. Calculate final score
+        int finalScore = currentScore;
+
+        if (survivedPlaylist)
+        {
+            finalScore += 200; // survival bonus
+        }
+
+        // 2. Determine leaderboard threshold
+        int threshold = 0;
+
+        if (leaderboard.entries.Count >= 5)
+        {
+            threshold = leaderboard.entries[leaderboard.entries.Count - 1].score;
+        }
+
+        // 3. Compute label
+        int label = finalScore >= threshold ? 1 : 0;
+
+        // 4. Update currentScore so SaveCurrentRunToLeaderboard saves the correct value
+        currentScore = finalScore;
+
+        // 5. Save to leaderboard
+        SaveCurrentRunToLeaderboard();
+
+        // 6. Return label so DataCollector can log it
+        return label;
+    }
+
     // Save leaderboard as JSON into PlayerPrefs
     // We are using JSON because unity can save strings easily with PlayerPrefs, so that the leaderboard object
     // is converted into JSON text, saved, then converted back into an object when the game loads again.

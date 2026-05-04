@@ -191,11 +191,35 @@ public class MusicPlayer : MonoBehaviour
         // NEW: Use our local playlist count
         if (currentIndex >= localPlaylist.Count)
         {
-            Debug.Log("End of playlist.");
+            Debug.Log("End of playlist - Player is alive.");
+            bool survivedPlaylist = true;
+            int label = GameManager.Instance.EvaluateRunAndReturnLabel(survivedPlaylist);
+            //send to data collector
+            FindFirstObjectByType<DataCollector>()?.RecordFinalLabel(label);
+
+            // Show Game Over UI
+            GameOverScrpit gameover = FindFirstObjectByType<GameOverScrpit>();
+            if (gameover != null){
+                gameover.OpenGameoverPanel();
+            }
+            else{
+                Debug.LogWarning("GameOverScript not found in scene!");
+            }
             return;
         }
 
         Debug.Log("[DEBUG] New index=" + currentIndex);
         PlayCurrentSong();
+    }
+
+    //for data collection
+    public int GetCurrentIndex()
+    {
+        return currentIndex;
+    }
+
+    public int GetTotalSongs()
+    {
+        return localPlaylist.Count;
     }
 }

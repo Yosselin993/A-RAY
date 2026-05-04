@@ -59,12 +59,17 @@ public class PlayerHealth : MonoBehaviour
             isDead = true; //died
             Debug.Log("Player died"); // shows on console 
             // gameover.OpenGameoverPanel();
+
+            bool survivedPlaylist = false;
+            int label = GameManager.Instance.EvaluateRunAndReturnLabel(survivedPlaylist);
+            //send to data collector
+            FindFirstObjectByType<DataCollector>()?.RecordFinalLabel(label);
             
-            // Saves this run to leaderboard
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.SaveCurrentRunToLeaderboard();
-            }
+            // // Saves this run to leaderboard
+            // if (GameManager.Instance != null)
+            // {
+            //     GameManager.Instance.SaveCurrentRunToLeaderboard();
+            // }
 
             gameObject.SetActive(false);
             if (gameover != null)
