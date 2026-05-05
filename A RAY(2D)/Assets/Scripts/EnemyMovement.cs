@@ -137,7 +137,7 @@ public class EnemyMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // stops moving
             // anim.SetFloat("horizontalInput", 0); // this switches to the idle
 
-            anim.SetBool("horizontalInput", true); // this keeps the enemy in attack mode while player is close
+            anim.SetFloat("horizontalInput", 1); // this keeps the enemy in attack mode while player is close
 
             Enemy_Combat combat = GetComponent<Enemy_Combat>();
             if(combat != null && combat.StartAttack())

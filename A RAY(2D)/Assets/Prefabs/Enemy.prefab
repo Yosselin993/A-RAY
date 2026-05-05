@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Combat
   damage: 1
-  attackCooldown: 1
+  attackCooldown: 0.5
   attackPoint: {fileID: 225238549439154269}
   attackRange: 1.5
   playerLayer:

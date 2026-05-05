@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy_Combat : MonoBehaviour
 {
     public int damage = 1;
-    public float attackCooldown = 1f;
+    public float attackCooldown = 0.5f;
     private float lastAttackTime;
 
     private int baseDamage; // for difficulty
