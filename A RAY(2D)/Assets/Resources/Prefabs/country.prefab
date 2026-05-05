@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6472731688978538867}
   m_Layer: 0
-  m_Name: CountryBG WorldChunk
+  m_Name: country
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

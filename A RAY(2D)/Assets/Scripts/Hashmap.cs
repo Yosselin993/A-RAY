@@ -17,7 +17,7 @@ public class Hashmap : MonoBehaviour
     public GameObject defaultBackground; //this is used in Start()
 
     //loads all the prefabs and the default background at the start of the game
-    void Start()
+    void Awake()
     {
         //this will load all the backgrounds into our Dictionary(BG)
         prefabBG();
@@ -63,6 +63,12 @@ public class Hashmap : MonoBehaviour
       //function purpose: This will select and apply the background based on the genre given by the API, but if the API doesn't return aything default background will display
     public void ChangeBackground(string genre)
     {
+        //adding because I had a problem where the BG was begin checked ay to early when it was empty. This lets me know when exactly the BG starts loading the keys and value
+        if (BG.Count == 0)
+        {
+            Debug.LogWarning("BG is empty, but prefabs are being loaded right now.");
+            prefabBG();
+        }
         //checking if the genre is return empty or unknown by the API
         if (string.IsNullOrEmpty(genre))
         {
