@@ -3855,7 +3855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a77c1636773fd469d23308b9ee42d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hashmap
-  defaultBackground: {fileID: 0}
+  defaultBackground: {fileID: 8035414010183304230, guid: f384955e24bfe414c991647ca56a2f7b, type: 3}
 --- !u!4 &1408290725
 Transform:
   m_ObjectHideFlags: 0
@@ -5826,6 +5826,10 @@ PrefabInstance:
     - target: {fileID: 8035414010183304230, guid: f384955e24bfe414c991647ca56a2f7b, type: 3}
       propertyPath: m_Name
       value: ForestBG WorldChunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8035414010183304230, guid: f384955e24bfe414c991647ca56a2f7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

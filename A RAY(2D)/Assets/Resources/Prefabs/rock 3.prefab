@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8471848642853923397}
   m_Layer: 0
-  m_Name: RockBG WorldChunk
+  m_Name: rock 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

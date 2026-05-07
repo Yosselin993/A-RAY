@@ -93,7 +93,7 @@ public class Hashmap : MonoBehaviour
             {
                 //then set then key's own value to the game scene.
                 SetBackground(prefab.Value);
-                Debug.Log("The genre matches the key name called: " + prefab.Key + "and set the background to its value"); //just a debuger to see the change worked in console
+                Debug.Log("The genre matches the key name called: " + prefab.Key + " and set the background to its value"); //just a debuger to see the change worked in console
                 return;
 
             }

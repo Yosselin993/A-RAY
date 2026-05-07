@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4482954974513092902}
   m_Layer: 0
-  m_Name: JazzBG WorldChunk
+  m_Name: jazz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

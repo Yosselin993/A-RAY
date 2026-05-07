@@ -877,7 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2340332287578103571}
   m_Layer: 0
-  m_Name: ForestBG WorldChunk
+  m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
