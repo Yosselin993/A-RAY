@@ -75,7 +75,38 @@ public class DataCollector : MonoBehaviour
         Debug.Log("[DataCollector] Sample: " + row);
     }
 
-    int GetLeaderboardThreshold()
+    public float GetPlaylistProgress()
+    {
+        MusicPlayer mp = FindFirstObjectByType<MusicPlayer>();
+        if (mp == null) return 0f;
+
+        int index = mp.GetCurrentIndex();
+        int total = mp.GetTotalSongs();
+        if (total == 0) return 0f;
+
+        return (float)index / total;
+    }
+
+    public int GetSongsRemaining()
+    {
+        MusicPlayer mp = FindFirstObjectByType<MusicPlayer>();
+        if (mp == null) return 0;
+
+        int index = mp.GetCurrentIndex();
+        int total = mp.GetTotalSongs();
+        return Mathf.Max(0, total - index - 1);
+    }
+
+    public float GetAverageScoreRate()
+    {
+        return (GameManager.Instance.currentScore - lastScore) / sampleInterval;
+    }
+
+    public float GetHealthDecayRate()
+    {
+        return (FindFirstObjectByType<PlayerHealth>().currentHealth - lastHealth) / sampleInterval;
+    }
+    public int GetLeaderboardThreshold()
     {
         var lb = GameManager.Instance.leaderboard.entries;
 
@@ -83,6 +114,10 @@ public class DataCollector : MonoBehaviour
             return 0;
 
         return lb[lb.Count - 1].score;
+    }
+    public float GetTimeElapsed()
+    {
+        return timeElapsed;
     }
 
     public void RecordFinalLabel(int label)
