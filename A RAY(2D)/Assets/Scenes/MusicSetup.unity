@@ -2226,6 +2226,7 @@ GameObject:
   - component: {fileID: 1264864482}
   - component: {fileID: 1264864481}
   - component: {fileID: 1264864480}
+  - component: {fileID: 1264864483}
   m_Layer: 5
   m_Name: StoredPenal
   m_TagString: Untagged
@@ -2316,6 +2317,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264864478}
   m_CullTransparentMesh: 1
+--- !u!114 &1264864483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264864478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5c14d6308478a4f8dd640a19a50a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicSetupUI
+  storedSongsContainer: {fileID: 1264864479}
+  storedSongPrefab: {fileID: 3293297388049308475, guid: e958d83d8b6a5424788b709f4dbab569, type: 3}
 --- !u!1 &1403520267
 GameObject:
   m_ObjectHideFlags: 0
