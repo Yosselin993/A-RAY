@@ -81,4 +81,30 @@ public class WorldManager : MonoBehaviour
         GameObject newChunk = Instantiate(chunkPrefab, spawnPosition, Quaternion.identity); // this creates the chunk in the scene
         spawnedChunks.Add(chunkIndex, newChunk); // this will save it into the Dictionary so we know this chunk already exists
     }
+
+    public void ChangeChunkPrefab(GameObject newChunkPrefab)
+    {
+        if (newChunkPrefab == null)
+        {
+            Debug.LogWarning("New chunk prefab is missing."); // to tell us if we are missing a prefaab
+            return;
+        }
+
+        // Here we are changing which chunk prefab will be used from now on when switching
+        chunkPrefab = newChunkPrefab;
+
+        Debug.Log("WorldManager changed chunk prefab to: " + newChunkPrefab.name);
+
+        // then we will clear old spawned chunks so the new background/chunk appears right away
+        foreach (KeyValuePair<int, GameObject> chunk in spawnedChunks)
+        {
+            Destroy(chunk.Value);
+        }
+
+        spawnedChunks.Clear();
+
+        // Spawning chunks again using the new chunk prefab
+        UpdateChunks();
+    }
+
 }

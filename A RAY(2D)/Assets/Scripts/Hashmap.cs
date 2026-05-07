@@ -63,6 +63,9 @@ public class Hashmap : MonoBehaviour
       //function purpose: This will select and apply the background based on the genre given by the API, but if the API doesn't return aything default background will display
     public void ChangeBackground(string genre)
     {
+        // this will search the active scene for the first worldManager object
+        WorldManager worldManager = FindFirstObjectByType<WorldManager>();
+
         //adding because I had a problem where the BG was begin checked ay to early when it was empty. This lets me know when exactly the BG starts loading the keys and value
         if (BG.Count == 0)
         {
@@ -92,7 +95,16 @@ public class Hashmap : MonoBehaviour
             if (genre.Contains(prefab.Key))
             {
                 //then set then key's own value to the game scene.
-                SetBackground(prefab.Value);
+                // SetBackground(prefab.Value);
+                // if the WorldManager exists in the scene, tell it to switch to the new chunk prefab that matches the genre
+                if (worldManager != null)
+                    {
+                        worldManager.ChangeChunkPrefab(prefab.Value); // changes the chunk preafab the WM will use with the chunk prefab inside of the dictionary
+                    }
+                    else
+                    {
+                        Debug.LogWarning("WorldManager was not found in the scene."); // debugging just in case no worldmanager
+                    }
                 Debug.Log("The genre matches the key name called: " + prefab.Key + " and set the background to its value"); //just a debuger to see the change worked in console
                 return;
 
@@ -100,8 +112,19 @@ public class Hashmap : MonoBehaviour
     
         }
         //if the genre could not match any key at all, it will display the defaultBackground.
-        SetBackground(defaultBackground);
-        Debug.Log("The genre given by the API, did not match any of the keys in BG at all.");
+        // SetBackground(defaultBackground);
+        // Debug.Log("The genre given by the API, did not match any of the keys in BG at all.");
+
+        if (worldManager != null)
+        {
+            worldManager.ChangeChunkPrefab(defaultBackground);
+        }
+        else
+        {
+            Debug.LogWarning("WorldManager was not found in the scene.");
+        }
+
+        Debug.Log("The genre given by the API did not match any keys, so default chunk was used.");
 
     }
 
