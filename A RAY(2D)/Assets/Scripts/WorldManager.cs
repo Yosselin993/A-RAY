@@ -17,6 +17,22 @@ public class WorldManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // if player isnt assigned, find player tag
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+            else
+            {
+                Debug.LogError("WorldManager could not find the Player. Make sure the player has the tag 'Player'."); // debugging, console
+                return;
+            }
+        }
+
         UpdateChunks(); // this will spawn the starting chunks as the game begins
     }
 
