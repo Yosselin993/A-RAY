@@ -520,10 +520,10 @@ MonoBehaviour:
   - {fileID: 2566367163753272743, guid: 8f6a4d030f1e05947bf045579ef57434, type: 3}
   - {fileID: 3679489873732178900, guid: d0cdfe56e2e287146a9ab46b1ccafe75, type: 3}
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4108686382084844146}
+  - {fileID: 8946479565333841742}
+  - {fileID: 1018436523116702114}
+  - {fileID: 837230462701875907}
   noEnemyChance: 0.1
   singleEnemyChance: 0.5
   groupEnemyChance: 0.25
